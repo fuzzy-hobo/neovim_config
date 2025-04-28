@@ -38,30 +38,18 @@ Schritt-für-Schritt-Anleitung
 
 Das gesamte Neovim-Setup befindet sich im Verzeichnis ~/.config/nvim.
 Kopiere dieses Verzeichnis auf das neue System.
-Erstelle ein Archiv auf deinem aktuellen System:
+Lade die zip-Datei herunter oder klone die Config mit folgenden Befehl:
 
-    tar -czf nvim-config.tar.gz -C ~/.config/nvim
+    git clone https://github.com/fuzzy-hobo/neovim_config
 
-Das erstellt ein Archiv nvim-config.tar.gz mit dem Inhalt von ~/.config/nvim.
+Das erstellt das Verzeichnis neovim_config mit allen Konfigurationsdateien.
 
-Übertrage das Archiv auf das neue System:
+Diesen Ordner umbenenn in nvim, dann kopiere oder verschiebe den gesamten Ordner in das Verzeichnis .config/nvim:
 
-Verwende scp, einen USB-Stick oder eine andere Methode, um das Archiv zu 
-übertragen. Beispiel mit scp:
+    mv neovim_config nvim
+    mv nvim ~/.config
 
-    scp nvim-config.tar.gz user@new-system:/home/user/
-
-Entpacke das Archiv auf dem neuen System:
-
-Navigiere zu dem Verzeichnis, in dem das Archiv liegt (z. B. /home/user/):
-
-    cd /home/user/
-
-Entpacke das Archiv:
-
-        tar -xzf nvim-config.tar.gz -C ~/.config
-
-Das erstellt das Verzeichnis ~/.config/nvim mit allen Konfigurationsdateien.
+Damit weiß neovim, wie es automatisch Plugins installieren muss.
 
 2. Starte Neovim und synchronisiere Plugins
 
