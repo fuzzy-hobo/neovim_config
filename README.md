@@ -1,10 +1,48 @@
 README.md: Neovim-Setup auf einem anderen Linux-System installieren
 
 Dieses Dokument beschreibt, wie du mein Neovim-Setup (~/.config/nvim) auf ein anderes 
-Linux-System übertragen und einrichten kannst, sodass Neovim genauso funktioniert wie 
-auf meinem aktuellen System. Das Setup enthält Plugins wie Lazy.nvim, Catppuccin, 
+Linux-System übertragen und einrichten kannst. Das Setup enthält Plugins wie Lazy.nvim, Catppuccin, 
 Neo-tree, Telescope, Treesitter, Lualine, LSP-Unterstützung (lua_ls, pyright, html), 
 black als Formatter und benutzerdefinierte Keymappings.
+
+Modulare Struktur meines ~/.config/nvim
+
+Hier ist die Struktur meines ~/.config/nvim-Verzeichnisses, damit du weißt, 
+was kopiert wird:
+
+~/.config/nvim/
+
+├── init.lua              # Haupt-Konfigurationsdatei
+
+├── lazy-lock.json        # Lockfile für Lazy.nvim
+
+├── lua/
+
+│   ├── plugins.lua       # Plugin-Definitionen mit Lazy.nvim
+
+│   ├── plugins/
+
+│   │   ├── catppuccin.lua  # Konfiguration für das Catppuccin-Theme
+
+│   │   ├── neo-tree.lua    # Konfiguration für Neo-tree
+
+│   │   ├── telescope.lua   # Konfiguration für Telescope
+
+│   │   ├── treesitter.lua  # Konfiguration für Treesitter
+
+│   │   ├── lualine.lua     # Konfiguration für Lualine
+
+│   │   ├── lsp.lua         # Konfiguration für LSP und nvim-cmp
+
+│   │   ├── mason.lua       # Konfiguration für mason.nvim und mason-tool-installer
+
+│   │   ├── format.lua      # Konfiguration für conform.nvim (black)
+
+│   │   └── (weitere Plugin-Konfigurationen, falls hinzugefügt)
+
+└── test2.py              # Testdatei (optional, kann gelöscht werden)
+
+
 Voraussetzungen
 
 Bevor du beginnst, stelle sicher, dass folgende Abhängigkeiten auf dem neuen System 
@@ -185,28 +223,6 @@ Unterschiedliche Neovim-Versionen:
     Wenn die Neovim-Version zu alt ist, aktualisiere sie:
 
         sudo apt update && sudo apt install neovim
-
-Struktur von ~/.config/nvim
-
-Hier ist die Struktur meines ~/.config/nvim-Verzeichnisses, damit du weißt, 
-was kopiert wird:
-
-~/.config/nvim/
-├── init.lua              # Haupt-Konfigurationsdatei
-├── lazy-lock.json        # Lockfile für Lazy.nvim
-├── lua/
-│   ├── plugins.lua       # Plugin-Definitionen mit Lazy.nvim
-│   ├── plugins/
-│   │   ├── catppuccin.lua  # Konfiguration für das Catppuccin-Theme
-│   │   ├── neo-tree.lua    # Konfiguration für Neo-tree
-│   │   ├── telescope.lua   # Konfiguration für Telescope
-│   │   ├── treesitter.lua  # Konfiguration für Treesitter
-│   │   ├── lualine.lua     # Konfiguration für Lualine
-│   │   ├── lsp.lua         # Konfiguration für LSP und nvim-cmp
-│   │   ├── mason.lua       # Konfiguration für mason.nvim und mason-tool-installer
-│   │   ├── format.lua      # Konfiguration für conform.nvim (black)
-│   │   └── (weitere Plugin-Konfigurationen, falls hinzugefügt)
-└── test2.py              # Testdatei (optional, kann gelöscht werden)
 
 Zusätzliche Hinweise
 
