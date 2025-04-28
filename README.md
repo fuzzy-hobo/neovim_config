@@ -13,26 +13,39 @@ Hier ist die Struktur meines ~/.config/nvim-Verzeichnisses, damit du weißt,
 was kopiert wird:
 
 ~/.config/nvim/
+
 ├── init.lua              # Haupt-Konfigurationsdatei
+
 ├── lazy-lock.json        # Lockfile für Lazy.nvim
+
 ├── lua/
+
 │   ├── plugins.lua       # Plugin-Definitionen mit Lazy.nvim
+
 │   ├── plugins/
+
 │   │   ├── catppuccin.lua  # Konfiguration für das Catppuccin-Theme
+
 │   │   ├── neo-tree.lua    # Konfiguration für Neo-tree
+
 │   │   ├── telescope.lua   # Konfiguration für Telescope
+
 │   │   ├── treesitter.lua  # Konfiguration für Treesitter
+
 │   │   ├── lualine.lua     # Konfiguration für Lualine
+
 │   │   ├── lsp.lua         # Konfiguration für LSP und nvim-cmp
+
 │   │   ├── mason.lua       # Konfiguration für mason.nvim und mason-tool-installer
+
 │   │   ├── format.lua      # Konfiguration für conform.nvim (black)
+
 │   │   └── (weitere Plugin-Konfigurationen, falls hinzugefügt)
+
 └── test.py              # Testdatei (optional, kann gelöscht werden)
 
-Voraussetzungen
 
-Bevor du beginnst, stelle sicher, dass folgende Abhängigkeiten auf dem neuen System 
-installiert sind.
+Voraussetzungen
 
 Installation via Repository: 
 (evtl. ist diese Neovim-Version veraltet - bei mir aktuell: 0.7 - zu alt!)
