@@ -1,0 +1,52 @@
+Lazy.nvim (lazy.nvim):
+
+    Ein moderner Plugin-Manager für Neovim, der Plugins effizient lädt und verwaltet. 
+    Er sorgt dafür, dass Plugins nur bei Bedarf geladen werden, was die Startzeit von 
+    Neovim verkürzt.
+
+Catppuccin (catppuccin/nvim):
+
+    Ein ästhetisches Farbschema für Neovim mit mehreren Varianten (z. B. Mocha, Latte). 
+    Es bietet ein angenehmes, kontrastreiches Design für bessere Lesbarkeit.
+
+Neo-tree (nvim-neo-tree/neo-tree.nvim):
+
+    Ein Dateiexplorer, der in einem Seitenfenster angezeigt wird. Ermöglicht das 
+    Navigieren, Erstellen, Löschen und Umbenennen von Dateien und Verzeichnissen 
+    direkt in Neovim.
+
+Telescope (nvim-telescope/telescope.nvim):
+
+    Ein leistungsstarkes Such- und Navigations-Tool. Ermöglicht das schnelle Finden 
+    von Dateien (<leader>ff), das Durchsuchen von Text (<leader>fg) und mehr mit einer 
+    fuzzy-search-fähigen Benutzeroberfläche.
+
+Treesitter (nvim-treesitter/nvim-treesitter):
+
+    Verbessert die Syntaxhervorhebung, Code-Navigation und Textmanipulation durch 
+    die Nutzung von Treesitter, einer modernen Parsing-Bibliothek. Unterstützt viele 
+    Programmiersprachen.
+
+Lualine (nvim-lualine/lualine.nvim):
+
+    Eine anpassbare Statusleiste für Neovim. Zeigt Informationen wie den aktuellen 
+    Modus, Dateinamen, Zeilennummer und Git-Status an.
+
+LSP-Unterstützung (neovim/nvim-lspconfig, hrsh7th/nvim-cmp):
+
+    Bietet Language Server Protocol (LSP)-Unterstützung für Code-Vervollständigung, 
+    Definitionen, Referenzen und mehr. nvim-cmp fügt Autovervollständigung hinzu, 
+    die mit LSP, Snippets und Buffern funktioniert.
+
+Mason (williamboman/mason.nvim, williamboman/mason-lspconfig.nvim, 
+WhoIsSethDaniel/mason-tool-installer.nvim):
+
+    Ein Tool-Manager, der Language Server (lua_ls, pyright, html) und andere Tools 
+    (black) automatisch installiert und verwaltet. mason-lspconfig und 
+    mason-tool-installer erweitern die Funktionalität für LSP und Formatter.
+
+Conform (stevearc/conform.nvim):
+
+    Ein Formatter-Plugin, das black für Python-Dateien verwendet. Kann so 
+    konfiguriert werden, dass es Dateien automatisch beim Speichern formatiert 
+    (derzeit deaktiviert).

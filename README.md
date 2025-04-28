@@ -1,55 +1,14 @@
-README.md: Neovim-Setup auf einem Linux-System installieren
+README.md: Neovim-Setup auf einem anderen Linux-System installieren
 
-Dieses Dokument beschreibt, wie du mein Neovim-Setup (~/.config/nvim) einrichten kannst. 
-Das Setup enthält Plugins wie Lazy.nvim, Catppuccin, 
+Dieses Dokument beschreibt, wie du mein Neovim-Setup (~/.config/nvim) auf ein anderes 
+Linux-System übertragen und einrichten kannst, sodass Neovim genauso funktioniert wie 
+auf meinem aktuellen System. Das Setup enthält Plugins wie Lazy.nvim, Catppuccin, 
 Neo-tree, Telescope, Treesitter, Lualine, LSP-Unterstützung (lua_ls, pyright, html), 
-Mason, black als Formatter und benutzerdefinierte Keymappings.
-
-Der Aufbau ist modular und enthält Automatisierungen zur vereinfachten Inbetriebnahme.
-
-Modulare Struktur von ~/.config/nvim
-
-Hier ist die Struktur meines ~/.config/nvim-Verzeichnisses, damit du weißt, 
-was kopiert wird:
-
-~/.config/nvim/
-
-├── init.lua              # Haupt-Konfigurationsdatei
-
-├── lazy-lock.json        # Lockfile für Lazy.nvim
-
-├── lua/
-
-│   ├── plugins.lua       # Plugin-Definitionen mit Lazy.nvim
-
-│   ├── plugins/
-
-│   │   ├── catppuccin.lua  # Konfiguration für das Catppuccin-Theme
-
-│   │   ├── neo-tree.lua    # Konfiguration für Neo-tree
-
-│   │   ├── telescope.lua   # Konfiguration für Telescope
-
-│   │   ├── treesitter.lua  # Konfiguration für Treesitter
-
-│   │   ├── lualine.lua     # Konfiguration für Lualine
-
-│   │   ├── lsp.lua         # Konfiguration für LSP und nvim-cmp
-
-│   │   ├── mason.lua       # Konfiguration für mason.nvim und mason-tool-installer
-
-│   │   ├── format.lua      # Konfiguration für conform.nvim (black)
-
-│   │   └── (weitere Plugin-Konfigurationen, falls hinzugefügt)
-
-└── test.py              # Testdatei (optional, kann gelöscht werden)
-
-
+black als Formatter und benutzerdefinierte Keymappings.
 Voraussetzungen
 
-Installation via Repository: 
-(evtl. ist diese Neovim-Version veraltet - bei mir aktuell: 0.7 - zu alt!)
-MERKE: wenn unsicher, ob die Version zu alt, bitte mit bei der Schritt-für-Schrittanleitung beginnen
+Bevor du beginnst, stelle sicher, dass folgende Abhängigkeiten auf dem neuen System 
+installiert sind:
 
 Neovim (Version 0.11 oder höher empfohlen):
 
@@ -63,7 +22,7 @@ Python 3 (für Python-Skripte und black):
 
     sudo apt install python3
 
-Überprüfe die Installation (sollte mindestens 0.8 sein):
+Überprüfe die Installation:
 
     python3 --version
 
@@ -75,14 +34,13 @@ Optional: Wenn du flake8 oder andere Linter hinzufügen möchtest, installiere s
 später über mason.nvim.
 
 Schritt-für-Schritt-Anleitung
-
 1. Kopiere das Neovim-Konfigurationsverzeichnis
 
 Das gesamte Neovim-Setup befindet sich im Verzeichnis ~/.config/nvim.
 Kopiere dieses Verzeichnis auf das neue System.
 Erstelle ein Archiv auf deinem aktuellen System:
 
-    tar -czf nvim-config.tar.gz -C ~/.config nvim
+    tar -czf nvim-config.tar.gz -C ~/.config/nvim
 
 Das erstellt ein Archiv nvim-config.tar.gz mit dem Inhalt von ~/.config/nvim.
 
@@ -105,74 +63,7 @@ Entpacke das Archiv:
 
 Das erstellt das Verzeichnis ~/.config/nvim mit allen Konfigurationsdateien.
 
-2. Aktuelle Version von neovim installieren (Stand 2025: nvim v0.11 bzw 0.12 als pre-release)
-
-Download eines AppImage:
-
-        - Website mit Downloads (auch für MacOS, Windows uvm): https://github.com/neovim/neovim/releases/
-
-Downloadbefehl: 
-
-        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage 
-
-AppImage ausführbar machen:
-
-        chmod u+x nvim-linux-x86_64.appimage
-
-Entpacken:
-
-        ./nvim-linux-x86_64.appimage --appimage-extract
-
-Prüfen, ob alles ordentlich entpackt wurde:
-
-        - im Ordner, wo es entpackt wurde, muss nun ein neuer Ordner sein, mit Name: squashfs-root
-        - darin sollte nvim liegen: squashfs-root/usr/bin/nvim
-
-
-Pfade überprüfen mit: echo $PATH
-
-    - prüfen, ob /usr/local/bin vorhanden ist
-    - falls nicht vorhanden (Ausgabe zB: /usr/bin:/bin:/usr/local/games:/usr/games), bitte diesen Ordner erstellen: sudo mkdir -p /usr/local/bin
-
-Den neuen Ordner zum Pfad hinzufügen:
-
-        export PATH="$/usr/local/bin:$PATH"
-
-Prüfung, ob Pfad hinzugefügt wurde:
-
-        echo $PATH
-
-        Ausgabe zB so: /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
-
-Prüfung: Pfad zu einer evtl. bestehenden nvim herausfinden:
-
-        which nvim
-
-falls nvim vorhanden ist -> löschen:
-
-        sudo apt remove neovim (falls neovim aus Repo installiert wurde - Stand 2025: Repo-nvim-Version bei 0.7, also zu alt)
-        erneute Prüfung mit: which nvim
-        
-falls immernoch ein nvim rumliegt (und nicht unter /usr/local/bin liegt), manuell dorthin navigieren und löschen:
-
-        sudo rm /pfad/zum/alten/nvim (siehe Ergebnis von which nvim)
-
-Pfad zu nvim (Ordner von entpacktes AppImage): 
-
-        /home/parrot/Downloads/squashfs-root/usr/bin 
-
-Link anpassen, sodass korrektes nvim (das vom AppImage) verwendet wird:
-        
-        ln -s /home/parrot/Downloads/squashfs-root/usr/bin/nvim ~/.lo
-
-        Allgemeiner Befehl für Symlink: ln -s /pfad/zum/extrahierten/nvim ~/usr/local/bin/nvim
-
-Neues Terminal öffen:
-
-        source ~/.bashrc
-
-
-3. Starte Neovim und synchronisiere Plugins
+2. Starte Neovim und synchronisiere Plugins
 
 Mein Setup verwendet Lazy.nvim als Plugin-Manager. 
 Lazy.nvim lädt die Plugins automatisch herunter, wenn sie noch nicht vorhanden sind.
@@ -191,7 +82,7 @@ Falls das nicht automatisch passiert, führe manuell aus:
 Lazy.nvim verwendet die Datei ~/.config/nvim/lazy-lock.json, um sicherzustellen, 
 dass dieselben Plugin-Versionen installiert werden wie auf dem ursprünglichen System.
 
-4. Installiere externe Tools mit mason.nvim
+3. Installiere externe Tools mit mason.nvim
 
 Mein Setup verwendet mason.nvim, um Language Server (lua_ls, pyright, html) und 
 Formatter (black) zu installieren. Diese Tools werden nicht mit dem 
@@ -217,20 +108,17 @@ Meine Konfiguration enthält mason-tool-installer, das black automatisch install
 
         :MasonInstall black
 
-5. Teste das Setup
+4. Teste das Setup
 
 Nachdem du die Konfiguration kopiert und die Abhängigkeiten installiert hast, teste 
 die wichtigsten Funktionen, um sicherzustellen, dass alles funktioniert.
 
     :e test.py
 
-Schreibe etwas unformatierten Code (falsche Einrückungen - unübersichtlich), z. B.:
+Schreibe etwas unformatierten Code, z. B.:
 python
 
-    def my_function(x,y):
-            result=x+y;
-        if result>10:
-                print('Result is greater than 10');return result
+    def my_function(x,y):result=x+y;if result>10:print('Result is greater than 10');return result
 
 Formatiere mit black:
 
@@ -269,7 +157,7 @@ Teste LSP-Funktionen:
         Suche Dateien mit Telescope: <leader>ff (Standard: Space ff).
         Überprüfe, ob das Catppuccin-Theme korrekt geladen ist.
 
-6. Fehlerbehebung
+5. Fehlerbehebung
 
 Falls etwas nicht funktioniert, überprüfe die folgenden Punkte:
 
@@ -310,6 +198,28 @@ Unterschiedliche Neovim-Versionen:
 
         sudo apt update && sudo apt install neovim
 
+Struktur von ~/.config/nvim
+
+Hier ist die Struktur meines ~/.config/nvim-Verzeichnisses, damit du weißt, 
+was kopiert wird:
+
+~/.config/nvim/
+├── init.lua              # Haupt-Konfigurationsdatei
+├── lazy-lock.json        # Lockfile für Lazy.nvim
+├── lua/
+│   ├── plugins.lua       # Plugin-Definitionen mit Lazy.nvim
+│   ├── plugins/
+│   │   ├── catppuccin.lua  # Konfiguration für das Catppuccin-Theme
+│   │   ├── neo-tree.lua    # Konfiguration für Neo-tree
+│   │   ├── telescope.lua   # Konfiguration für Telescope
+│   │   ├── treesitter.lua  # Konfiguration für Treesitter
+│   │   ├── lualine.lua     # Konfiguration für Lualine
+│   │   ├── lsp.lua         # Konfiguration für LSP und nvim-cmp
+│   │   ├── mason.lua       # Konfiguration für mason.nvim und mason-tool-installer
+│   │   ├── format.lua      # Konfiguration für conform.nvim (black)
+│   │   └── (weitere Plugin-Konfigurationen, falls hinzugefügt)
+└── test2.py              # Testdatei (optional, kann gelöscht werden)
+
 Zusätzliche Hinweise
 
 Automatisierung für black: Derzeit ist die automatische Formatierung mit black 
@@ -338,4 +248,5 @@ Keymappings:
 
 Weitere Keymappings findest du in den jeweiligen Plugin-Konfigurationen 
 (z. B. Telescope: <leader>ff).
+
 
